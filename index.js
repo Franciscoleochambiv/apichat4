@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
         if(error) return callback(error); //error handeling
         //no errors
         //emit an event from the backend to the front end with a payload in {} part
-        socket.emit('message', { user: 'admin', text: `${user.name}, Bienvenido  ${user.room}` }); // welcomes user to chat
+        socket.emit('message', { user: 'admin', text: `${user.name}, Bienvenido a sala  ${user.room}` }); // welcomes user to chat
         //broadcast sends a message to everyone besides that specific user
         socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name}, Se ha unido!`});//lets everyone know except user that they joined 
 
