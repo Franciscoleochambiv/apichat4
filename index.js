@@ -4,6 +4,7 @@ const http = require('http');
 const cors = require('cors'); //we used cors since heroku is used for backend, netlify is used for frontend, we need to connect them
 //we need cors in this file or else some of our requests(sockets) will be ignored and or  not accepted
 //when we deploy the website sometimes it restricts the resources that are being sent
+const https = require("https");
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require ('./users.js');
 
@@ -81,7 +82,19 @@ io.on('connection', (socket) => {
         }
     })
 })
-server.listen(PORT, () => console.log(`Server has started on puerto ${PORT}`));
+
+const httpsOptions = {
+    cert:fs.readFileSync(path.join(__dirname,'ctr','cert1.pem')),
+    key:fs.readFileSync(path.join(__dirname,'ctr','privkey1.pem'))
+ }
+
+ https.createServer(httpsOptions,server)
+  .listen( PORT,function(){
+   console.log(`Server running on port https ${PORT}`)      
+      })
+
+
+//server.listen(PORT, () => console.log(`Server has started on puerto ${PORT}`));
 
 
 
