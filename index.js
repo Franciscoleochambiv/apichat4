@@ -14,7 +14,17 @@ const PORT = process.env.PORT || 8006;  //5000 is for local to try it out
 const router = require('./router'); //since we created our router and router, we can require router
 
 const app = express();
-const server = http.createServer(app);
+
+
+const httpsOptions = {
+    cert:fs.readFileSync(path.join(__dirname,'ctr','cert1.pem')),
+    key:fs.readFileSync(path.join(__dirname,'ctr','privkey1.pem'))
+ }
+
+
+const server = https.createServer(httpsOptions,app)
+
+//http.createServer(app);
 const io = socketio(server);  //this is an instance of the socketio
 
 app.use(router);
@@ -85,18 +95,17 @@ io.on('connection', (socket) => {
     })
 })
 
-const httpsOptions = {
-    cert:fs.readFileSync(path.join(__dirname,'ctr','cert1.pem')),
-    key:fs.readFileSync(path.join(__dirname,'ctr','privkey1.pem'))
- }
-
+/*
  https.createServer(httpsOptions,server)
   .listen( PORT,function(){
    console.log(`Server running on port https ${PORT}`)      
       })
 
 
-//server.listen(PORT, () => console.log(`Server has started on puerto ${PORT}`));
+*/
+
+
+server.listen(PORT, () => console.log(`Server has started on puerto ${PORT}`));
 
 
 
