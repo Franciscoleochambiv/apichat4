@@ -6,6 +6,7 @@ const cors = require('cors'); //we used cors since heroku is used for backend, n
 //we need cors in this file or else some of our requests(sockets) will be ignored and or  not accepted
 //when we deploy the website sometimes it restricts the resources that are being sent
 const https = require("https");
+const path = require('path');
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require ('./users.js');
 
