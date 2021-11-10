@@ -1,5 +1,6 @@
 const express = require('express'); //no important statements since we are in the node and we import it via require
 const socketio = require('socket.io');
+const fs = require("fs");
 const http = require('http');
 const cors = require('cors'); //we used cors since heroku is used for backend, netlify is used for frontend, we need to connect them
 //we need cors in this file or else some of our requests(sockets) will be ignored and or  not accepted
